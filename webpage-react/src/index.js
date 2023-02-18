@@ -3,11 +3,15 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Footer } from './components/footer';
+import { Body } from './components/body';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <App />
+    <Body title='コンポーネント化' />
+    <Footer name='mori' />
   </React.StrictMode>
 );
 
