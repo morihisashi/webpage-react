@@ -5,10 +5,13 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Footer } from './components/footer';
 import { Body } from './components/body';
+import { Header } from './components/header';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const headerArray = ["Home", "About", "Practical"];
 root.render(
   <React.StrictMode>
+    <Header array={[headerArray]}/>
     <App />
     <Body title='コンポーネント化' />
     <Footer name='mori' />
