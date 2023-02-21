@@ -1,26 +1,19 @@
-import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+import { Homepage } from './pages/Homepage';
+import { Aboutpage } from './pages/Aboutpage';
+import { Practicalpage } from './pages/Practicalpage';
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1 className={"App"}>Hello React Router v6</h1>
+      <Routes>
+        <Route path="/" element={<Homepage title="Homeを渡す"/>} />
+        <Route path="/about" element={<Aboutpage title="aboutを渡す"/>} />
+        <Route path="/practical" element={<Practicalpage title="practicalを渡す"/>} />
+      </Routes>
     </div>
   );
 }
 
-export default App;

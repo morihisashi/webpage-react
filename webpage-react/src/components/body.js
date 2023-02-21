@@ -3,10 +3,10 @@ import './body.css';
 
 export function Body(props){
     return (
-        <div className="Body">
+        <div className={"Body"}>
             <body>
                 <h1>{ props.title }</h1>
-                <p>テスト</p>
+                <p>{ props.name }</p>
             </body>
         </div>
     );

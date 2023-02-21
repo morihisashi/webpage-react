@@ -1,13 +1,14 @@
 import React from 'react';
-import './header.css';
+import header from './header.module.css';
+import { Link } from "react-router-dom";
 
 export function Header(props){
     return (
-        <div className="App">
+        <div className={header.atag}>
             <p>headerコンポーネントの作成</p>
-            <a className="atag">{props.array[0][0]}</a>
-            <a className="atag">{props.array[0][1]}</a>
-            <a className="atag">{props.array[0][2]}</a>
+            <Link to="/" className={header.atag}>{props.array[0][0]}</Link>
+            <Link to="/about" className={header.atag}>{props.array[0][1]}</Link>
+            <Link to="/practical" className={header.atag}>{props.array[0][2]}</Link>
         </div>
     );
 }
