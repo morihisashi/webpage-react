@@ -12,6 +12,11 @@ export function Homepage(){
     setAddText([...addText, text]);
     setText("");
   }
+
+  /* ↓関数onClickAddTextを定義 */
+  const onClickRegistText = () => {
+    sessionStorage['todoData'] = addText;
+  }
   /*
   useEffect(() => {
     console.log(addText);
@@ -30,13 +35,12 @@ export function Homepage(){
         </div>
 
         {/* ↓buttonを追加 */}
-        <button onClick={() => onClickAddText()}>追加</button>
-
-        <p>リアルタイム：{text}</p>
-
-        {/* ↓pタグを追加 */}
-        <p>ボタンクリック：{addText}</p>
+        <button onClick={() => onClickAddText()}>一時保存へ追加</button>
+        <p>一時保存されているtodoList</p>
+        {addText.map((val) => <li>{val}</li>)}
+        <button onClick={() => onClickRegistText()}>登録</button>
       </div>
+      
     </div>
   );
 }
