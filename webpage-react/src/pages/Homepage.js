@@ -1,20 +1,41 @@
-import { useState, useEffect, React} from 'react';
+import { useState, React} from 'react';
 import { Body } from '../components/body';
 import '../App.css';
 
 export function Homepage(){
-  const [count, setCount] = useState(0)
-  const [count2, setCount2] = useState(0)
-  useEffect(()=>{
-    console.log('useEffectが実行されました')
-  },[count])
+  const [text, setText] = useState("");
+  /* ↓state変数「addText」を定義 */
+  const [addText, setAddText] = useState([]);
+
+  /* ↓関数onClickAddTextを定義 */
+  const onClickAddText = () => {
+    setAddText([...addText, text]);
+    setText("");
+  }
+  /*
+  useEffect(() => {
+    console.log(addText);
+  },[text]);
+  */
   return (
     <div>
-      <Body title="Home Pages" name="homepageへ遷移" />
+      <Body title="ToDo app" name="登録画面" />
       <div className={"App"}>
-      <h2>Count: { count }/ Count2: { count2 }</h2>
-      <button onClick={() => setCount(count+1)}>Count+</button><br/>
-      <button onClick={() => setCount2(count2+1)}>Count2+</button><br/>
+        <div>
+          <textarea 
+            className={"textarea"}
+            value={text}
+            onChange={(event) => setText(event.target.value)}
+          />
+        </div>
+
+        {/* ↓buttonを追加 */}
+        <button onClick={() => onClickAddText()}>追加</button>
+
+        <p>リアルタイム：{text}</p>
+
+        {/* ↓pタグを追加 */}
+        <p>ボタンクリック：{addText}</p>
       </div>
     </div>
   );
