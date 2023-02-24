@@ -1,27 +1,30 @@
-import { useState, React} from 'react';
+import { useState, useEffect, React} from 'react';
 import { Body } from '../components/body';
 import '../App.css';
 
 export function Homepage(){
   const [text, setText] = useState("");
-  /* ↓state変数「addText」を定義 */
   const [addText, setAddText] = useState([]);
+  const [temporaryText, setTemporaryText] = useState([]);
 
-  /* ↓関数onClickAddTextを定義 */
   const onClickAddText = () => {
-    setAddText([...addText, text]);
+    setTemporaryText([...temporaryText, text]);
     setText("");
   }
 
-  /* ↓関数onClickAddTextを定義 */
   const onClickRegistText = () => {
+    addText.push(temporaryText);
     sessionStorage['todoData'] = addText;
   }
-  /*
+  
   useEffect(() => {
-    console.log(addText);
-  },[text]);
-  */
+    const sessionStr = sessionStorage.getItem('todoData');
+    if(sessionStr){
+      const array = sessionStr.split(',');
+      setAddText(array);
+    }
+  },[]);
+  
   return (
     <div>
       <Body title="ToDo app" name="登録画面" />
@@ -37,7 +40,7 @@ export function Homepage(){
         {/* ↓buttonを追加 */}
         <button onClick={() => onClickAddText()}>一時保存へ追加</button>
         <p>一時保存されているtodoList</p>
-        {addText.map((val) => <li>{val}</li>)}
+        {temporaryText.map((val) => <div>{val}</div>)}
         <button onClick={() => onClickRegistText()}>登録</button>
       </div>
       
