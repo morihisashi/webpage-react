@@ -1,31 +1,39 @@
-import {React, useState }from 'react';
+import {React, useState, useEffect }from 'react';
 import '../App.css';
 
 export function Listpage(){
-    const str = sessionStorage.getItem('todoData');
-    const array = str.split(',');
-    const [del, delText] = useState("");
-    const [delArrays, setDel] = useState(array);
+    const str= sessionStorage.getItem('todoData');
+    const [array, setArray]= useState(str.split(','));
 
-    const onClickDelText = (val) => {
-        delText({val});
-        setDel(
-            delArrays.filter((delArray, index) => (delArray !== del))
-        )
-        console.log(delArrays);
-        //sessionStorage['todoData'] = delArrays;
+    const onClickDelArray = (val) => {
+        setArray(
+            array.filter((del) => (del !== val))
+        );
     }
-    return (
+
+    useEffect(() => {
+        const strCheck = sessionStorage['todoData'];
+        if(!strCheck){
+            setArray("");
+        }
+    },[])
+    
+    useEffect(() => {
+        sessionStorage['todoData'] = array;
+    },[array])
+
+    return ( str !== "" ?
         <div className={"App"}>
             <h1>ToDo List</h1>
             <div className={"list"}>
                 {array.map((val) => 
                 <div>
                     <div className={"listItmes"}>{val}</div>
-                    <button onClick={() => onClickDelText(val)}>削除</button>
+                    <button onClick={() => onClickDelArray(val)}>削除</button>
                 </div>
                 )}
             </div>
         </div>
+        :<div>登録データがありません。</div>
     );
 }
