@@ -2,7 +2,7 @@ import {React, useState, useEffect }from 'react';
 import '../App.css';
 
 export function Listpage(){
-    const str= sessionStorage.getItem('todoData');
+    const str = sessionStorage.getItem('todoData');
     const [array, setArray]= useState(str.split(','));
 
     const onClickDelArray = (val) => {
