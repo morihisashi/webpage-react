@@ -12,13 +12,6 @@ export function Listpage(){
     }
 
     useEffect(() => {
-        const strCheck = sessionStorage['todoData'];
-        if(typeof(strCheck) == 'undefined'){
-            setArray("");
-        }
-    },[])
-    
-    useEffect(() => {
         sessionStorage['todoData'] = array;
     },[array])
 
