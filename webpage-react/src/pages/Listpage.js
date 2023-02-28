@@ -2,27 +2,34 @@ import {React, useState, useEffect }from 'react';
 import '../App.css';
 
 export function Listpage(){
-    const str = sessionStorage.getItem('todoData');
-    const [array, setArray]= useState(str.split(','));
+    const text = sessionStorage.getItem('todoText');
+    const todoDate = sessionStorage.getItem('todoDate');
+    const [array, setArray]= useState(text.split(','));
+    const [date, setDate]= useState(todoDate.split(','));
 
-    const onClickDelArray = (val) => {
+    const onClickDelArray = (val, key) => {
         setArray(
             array.filter((del) => (del !== val))
+        );
+        setDate(
+            date.filter((delDate) => (delDate !== date[key]))
         );
     }
 
     useEffect(() => {
-        sessionStorage['todoData'] = array;
+        sessionStorage['todoText'] = array;
+        sessionStorage['todoDate'] = date;
     },[array])
 
-    return ( str !== "" ?
+    return ( text !== "" ?
         <div className={"App"}>
             <h1>ToDo List</h1>
             <div className={"list"}>
-                {array.map((val) => 
+                {array.map((val, key) => 
                 <div>
+                    <p>期限：{date[key]}</p>
                     <div className={"listItmes"}>{val}</div>
-                    <button onClick={() => onClickDelArray(val)}>削除</button>
+                    <button onClick={() => onClickDelArray(val, key)}>削除</button>
                 </div>
                 )}
             </div>

@@ -5,42 +5,55 @@ export function TodoRegist(){
     const [text, setText] = useState("");
     const [addText, setAddText] = useState([]);
     const [temporaryText, setTemporaryText] = useState([]);
+    const [date, setDate] = useState("");
+    const [temporaryDate, setTemporaryDate] = useState([]);
+    const [addDate, setAddDate] = useState([]);
 
     const onClickAddText = () => {
         setTemporaryText([...temporaryText, text]);
         setText("");
+        setTemporaryDate([...temporaryDate, date]);
+        setDate("");
     }
 
     const onClickRegistText = () => {
         addText.push(temporaryText);
-        sessionStorage['todoData'] = addText;
+        addDate.push(temporaryDate);
+        sessionStorage['todoText'] = addText;
+        sessionStorage['todoDate'] = addDate;
     }
     
     useEffect(() => {
-        const sessionStr = sessionStorage.getItem('todoData');
-        if(sessionStr){
-            const array = sessionStr.split(',');
-            setAddText(array);
+        const sessionText = sessionStorage.getItem('todoText');
+        const sessionDate = sessionStorage.getItem('todoDate');
+        if(sessionText){
+            const arrayText = sessionText.split(',');
+            setAddText(arrayText);
         } else {
-            sessionStorage['todoData'] = "";
+            sessionStorage['todoText'] = "";
+        }
+        if(sessionDate){
+            const arrayDate = sessionDate.split(',');
+            setAddDate(arrayDate);
+        } else {
+            sessionStorage['todoDate'] = "";
         }
     },[]);
 
     return (
         <div className={"App"}>
-        <div>
-          <textarea 
-            className={"textarea"}
-            value={text}
-            onChange={(event) => setText(event.target.value)}
-          />
+            <p>期限：<input type="date" onChange={(e) => setDate(e.target.value)}></input></p>
+            <div>
+            <textarea 
+                className={"textarea"}
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+            />
+            </div>
+            <button onClick={() => onClickAddText()}>一時保存へ追加</button>
+            <p>一時保存されているtodoList</p>
+            {temporaryText.map((val, key) => <p>{temporaryDate[key]} : {val}</p>)}
+            <button onClick={() => onClickRegistText()}>登録</button>
         </div>
-
-        {/* ↓buttonを追加 */}
-        <button onClick={() => onClickAddText()}>一時保存へ追加</button>
-        <p>一時保存されているtodoList</p>
-        {temporaryText.map((val) => <div>{val}</div>)}
-        <button onClick={() => onClickRegistText()}>登録</button>
-      </div>
     );
 }
