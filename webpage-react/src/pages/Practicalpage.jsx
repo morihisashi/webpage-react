@@ -1,9 +1,12 @@
-import React from 'react';
+import { React, useState, useEffect } from 'react';
 import { Body } from '../components/body';
 import { useForm } from 'react-hook-form';
 import '../App.css';
 
 export function Practicalpage(){
+    const [addDate, setAddDate] = useState([]);
+    const [addText, setAddText] = useState([]);
+    
     // 初期化
     const {
         register,
@@ -14,9 +17,32 @@ export function Practicalpage(){
 
     // フォーム送信ボタンを押された時の処理
     const onsubmit = (data) => {
-        console.log(data);
+        setAddDate([...addDate, data['date']]);
+        setAddText([...addText, data['text']]);
         reset();   // フォームに入力した値をリセット
     };
+
+    useEffect(() => {
+        const sessionText = sessionStorage.getItem('text');
+        const sessionDate = sessionStorage.getItem('date');
+        if(sessionText){
+            const arrayText = sessionText.split(',');
+            setAddText(arrayText);
+        } else {
+            sessionStorage['text'] = "";
+        }
+        if(sessionDate){
+            const arrayDate = sessionDate.split(',');
+            setAddDate(arrayDate);
+        } else {
+            sessionStorage['date'] = "";
+        }
+    },[]);
+
+    useEffect(() => {
+        sessionStorage['date'] = addDate;
+        sessionStorage['text'] = addText;
+    })
 
     return (
     <div className={"App"}>
@@ -25,9 +51,7 @@ export function Practicalpage(){
             <input type="date" {...register('date', { required: '日付を入力してね' })} />
             <p>{errors.date?.message}</p> {/* エラー表示 */}
                 <textarea className={"textarea"}
-                    {...register('text', {
-                    required: 'やることを入力してね',
-                    })}
+                    {...register('text', { required: 'やることを入力してね' })}
                 />
             <p>{errors.text?.message}</p> {/* エラー表示 */}
             <input type="submit" value='保存' />
