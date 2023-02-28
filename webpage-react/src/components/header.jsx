@@ -10,6 +10,7 @@ export function Header(props){
             <Link to="/list">todoの一覧へ</Link>
             <Link to="/about" className={header.atag}>{props.array[0][1]}</Link>
             <Link to="/practical" className={header.atag}>{props.array[0][2]}</Link>
+            <Link to="/practicallist">Practical List</Link>
         </div>
     );
 }
