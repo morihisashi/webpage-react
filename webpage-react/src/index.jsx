@@ -11,7 +11,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 const headerArray = ["Home", "About", "Practical"];
 root.render(
   <React.StrictMode>
-    <BrowserRouter basename={process.env.homepage}>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Header array={[headerArray]}/>
       <App />
       <Footer array={[headerArray]} />
