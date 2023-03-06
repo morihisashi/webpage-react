@@ -10,12 +10,12 @@ export default function App() {
   return (
     <div>
       <Routes>
-        <Route path="https://morihisashi.github.io/webpage-react" element={<Homepage />} />
-        <Route path="https://morihisashi.github.io/webpage-react/list" element={<Listpage />} />
-        <Route path="https://morihisashi.github.io/webpage-react/about" element={<Aboutpage />} />
-        <Route path="https://morihisashi.github.io/webpage-react/practical" element={<Practicalpage />} />
-        <Route path="https://morihisashi.github.io/webpage-react/practicallist" element={<PracticalList/>} />
-        <Route path="https://morihisashi.github.io/*" element={<Notpage title="ページが見つかりません"/>} />
+        <Route path="/webpage-react" element={<Homepage />} />
+        <Route path="/webpage-react/list" element={<Listpage />} />
+        <Route path="/webpage-react/about" element={<Aboutpage />} />
+        <Route path="/webpage-react/practical" element={<Practicalpage />} />
+        <Route path="/webpage-react/practicallist" element={<PracticalList/>} />
+        <Route path="*" element={<Notpage title="ページが見つかりません"/>} />
       </Routes>
     </div>
   );
