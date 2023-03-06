@@ -15,8 +15,7 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "postbuild": "cp build/index.html build/404.html",
+    "deploy": "npm run build && gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -40,5 +39,8 @@
       "last 1 safari version"
     ]
   },
-  "homepage":"https://morihisashi.github.io/webpage-react"
+  "homepage": "https://morihisashi.github.io/webpage-react/",
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
+  }
 }
