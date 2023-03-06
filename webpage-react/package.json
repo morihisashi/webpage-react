@@ -39,7 +39,7 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://morihisashi.github.io/webpage-react",
+  "homepage": "https://morihisashi.github.io/webpage-react/",
   "devDependencies": {
     "gh-pages": "^5.0.0"
   }
