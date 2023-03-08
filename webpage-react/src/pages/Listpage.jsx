@@ -7,9 +7,9 @@ export function Listpage(){
     const [array, setArray]= useState(text.split(','));
     const [date, setDate]= useState(todoDate.split(','));
 
-    const onClickDelArray = (val, key) => {
+    const onClickDelArray = (key) => {
         setArray(
-            array.filter((del) => (del !== val))
+            array.filter((del) => (del !== array[key]))
         );
         setDate(
             date.filter((delDate) => (delDate !== date[key]))
@@ -19,7 +19,7 @@ export function Listpage(){
     useEffect(() => {
         sessionStorage['todoText'] = array;
         sessionStorage['todoDate'] = date;
-    },[array])
+    },[array, date])
 
     return ( text !== "" ?
         <div className={"App"}>
@@ -29,7 +29,7 @@ export function Listpage(){
                 <div>
                     <p>期限：{date[key]}</p>
                     <div className={"listItmes"}>{val}</div>
-                    <button onClick={() => onClickDelArray(val, key)}>削除</button>
+                    <button onClick={() => onClickDelArray(key)}>削除</button>
                 </div>
                 )}
             </div>

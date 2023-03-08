@@ -17,10 +17,8 @@ export function TodoRegist(){
     }
 
     const onClickRegistText = () => {
-        addText.push(temporaryText);
-        addDate.push(temporaryDate);
-        sessionStorage['todoText'] = addText;
-        sessionStorage['todoDate'] = addDate;
+        setAddText([...addText, temporaryText]);
+        setAddDate([...addDate, temporaryDate]);
     }
     
     useEffect(() => {
@@ -39,6 +37,11 @@ export function TodoRegist(){
             sessionStorage['todoDate'] = "";
         }
     },[]);
+
+    useEffect(() => {
+        sessionStorage['todoText'] = addText;
+        sessionStorage['todoDate'] = addDate;
+    },[addText, addDate])
 
     return (
         <div className={"App"}>
